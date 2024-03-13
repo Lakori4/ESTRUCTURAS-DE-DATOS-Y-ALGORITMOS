@@ -3,51 +3,47 @@
 #include <iostream>
 #include <vector>
 #include "Hoja 4.h"
+#include "C:\Users\Santi\OneDrive - Universidad Antonio De Nebrija\1º Año\2º Semestre\ESTRUCTURAS DE DATOS Y ALGORITMOS\Teoría\T3-TIPOS ABSTRACTOS DE DATOS (TAD)\Nodo.h"
 
 using namespace std;
 
-/*
-CLASE Pila
-*/ 
 
 // Inserta un elemento en la cima de la pila
 void Stack::push(int num)
 {
-    pila.push_back(num);
+    shared_ptr<Nodo> elem = make_shared<Nodo>(Nodo(num, nullptr));
 
-    front++; 
+    if (front != nullptr)
+    {
+        elem->setNext(front);
+    }
+    front = elem; // La pila debe señalar siempre al elemento incluido
 }
 
 // Elimina un elemento en la cima de la pila
 void Stack::pop()
 {
-    pila.pop_back();
-    front--;
+    front = front->getNext();
 }
 
 // Devuelve el elemento cima de la pila
 int Stack::top() const
 {
-    if (empty())
-    {
-        throw -1;
-    }
-
-    return (pila.back());
+    return (front->getNum());
 }
 
-// Vacía la pila
-void Stack::clear()
-{
-    front = -1;
-    pila.clear();
-}
-
-// Determina si la pila está vací­a o no
+// Determina si la pila estÃ¡ vacÃ­a o no
 bool Stack::empty() const
 {
-    return (front == -1);
+    return (front == nullptr);
 }
+
+/*
+
+
+
+
+*/
 
 int main()
 {
@@ -68,11 +64,7 @@ int main()
         case 2:
             cout << "\n\nLos elementos de la pila son: ";
 
-            if (s.empty())
-            {
-                cout << "\n\n\tLA PILA ESTÁ VACÍA";
-                break;
-            }
+            dispEmpty(s);
 
             while (!s.empty())
             {
@@ -93,11 +85,7 @@ int main()
 
             n = s.top();
 
-            if (s.empty())
-            {
-                cout << "\n\n\tLA PILA ESTÁ VACÍA";
-                break;
-            }
+            dispEmpty(s);
 
             while (!s.empty())
             {
@@ -126,28 +114,30 @@ int main()
             cout << "Indica el número que quieres buscar: ";
             cin >> n;
 
-            if (s.empty())
-            {
-                cout << "\n\n\tLA PILA ESTÁ VACÍA";
-                break;
-            }
+            dispEmpty(s);
 
             while (!s.empty())
             {
 
                 if (s.top() == n)
                 {
-                    veces = true; //Se usa esta variable para ahorrar memoria
+                    veces = true; // Se usa esta variable para ahorrar memoria
                 }
 
                 aux.push(s.top());
                 s.pop();
             }
 
-            if (veces) { cout << "\n\nEl número " << n << " está en la pila."; } //Si la condición de arriba se ha cumlpido, se ha encontrado el número.
-            else { cout << "\n\nEl número " << n << " NO está en la pila."; }
+            if (veces)
+            {
+                cout << "\n\nEl número " << n << " está en la pila.";
+            } // Si la condición de arriba se ha cumlpido, se ha encontrado el número.
+            else
+            {
+                cout << "\n\nEl número " << n << " NO está en la pila.";
+            }
 
-            veces = false; //Se devuelve al valor anterior
+            veces = false; // Se devuelve al valor anterior
 
             while (!aux.empty())
             {
@@ -161,11 +151,7 @@ int main()
             cout << "Indica el número que quieres buscar: ";
             cin >> n;
 
-            if (s.empty())
-            {
-                cout << "\n\n\tLA PILA ESTÁ VACÍA";
-                break;
-            }
+            dispEmpty(s);
 
             while (!s.empty())
             {
@@ -178,6 +164,7 @@ int main()
                 aux.push(s.top());
                 s.pop();
             }
+
             if (veces > 0)
             {
                 cout << "\n\nEl número \"" << n << "\" está " << veces << " veces en la pila";
@@ -222,4 +209,12 @@ int menu()
     cin >> opc;
     system("cls");
     return opc;
+}
+
+void dispEmpty(Stack const &s)
+{
+    if (s.empty())
+    {
+        cout << "\n\n\tLA PILA ESTÁ VACÍA";
+    }
 }
