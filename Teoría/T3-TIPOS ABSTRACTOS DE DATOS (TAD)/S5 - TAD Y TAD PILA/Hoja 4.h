@@ -18,8 +18,8 @@ class Stack {
 
         bool empty() const;
         void push(int num);
-        void pop();
-        int top() const;
+        void pop(); //NO HAY USOS
+        shared_ptr <Nodo> getTop() const;
 };
 
 int menu();

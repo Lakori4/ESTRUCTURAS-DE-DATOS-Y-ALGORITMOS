@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 // Inserta un elemento en la cima de la pila
 void Stack::push(int num)
 {
@@ -27,9 +26,9 @@ void Stack::pop()
 }
 
 // Devuelve el elemento cima de la pila
-int Stack::top() const
+shared_ptr<Nodo> Stack::getTop() const
 {
-    return (front->getNum());
+    return (front);
 }
 
 // Determina si la pila estÃ¡ vacÃ­a o no
@@ -48,8 +47,9 @@ bool Stack::empty() const
 int main()
 {
     bool cont = true;
-    Stack s, aux;
+    Stack s;
     int n, veces = 0;
+    shared_ptr<Nodo> ptrAux;
 
     do
     {
@@ -62,124 +62,114 @@ int main()
             break;
 
         case 2:
-            cout << "\n\nLos elementos de la pila son: ";
 
             dispEmpty(s);
 
-            while (!s.empty())
+            if (!s.empty())
             {
-                cout << s.top() << ", ";
-                aux.push(s.top());
-                s.pop();
-            }
+                cout << "\n\nLos elementos de la pila son: ";
 
-            while (!aux.empty())
-            {
-                s.push(aux.top());
-                aux.pop();
+                ptrAux = s.getTop();
+
+                while (ptrAux != nullptr)
+                {
+                    cout << ptrAux->getNum() << ", ";
+                    ptrAux = ptrAux->getNext();
+                }
             }
 
             break;
 
         case 3:
 
-            n = s.top();
-
             dispEmpty(s);
 
-            while (!s.empty())
+            if (!s.empty())
             {
 
-                if (s.top() > n)
+                ptrAux = s.getTop();
+                n = ptrAux->getNum();
+
+                while (ptrAux != nullptr)
                 {
-                    n = s.top();
+                    if (n < ptrAux->getNum())
+                    {
+                        n = ptrAux->getNum();
+                    }
+
+                    ptrAux = ptrAux->getNext();
                 }
-
-                aux.push(s.top());
-                s.pop();
+                cout << "\n\nEl elemento mayor de la pila es:  " << n;
             }
-
-            while (!aux.empty())
-            {
-                s.push(aux.top());
-                aux.pop();
-            }
-
-            cout << "\n\nEl elemento mayor de la pila es:  " << n;
 
             break;
 
         case 4:
 
-            cout << "Indica el número que quieres buscar: ";
-            cin >> n;
-
             dispEmpty(s);
 
-            while (!s.empty())
+            if (!s.empty())
             {
+                cout << "Indica el número que quieres buscar: ";
+                cin >> n;
+                ptrAux = s.getTop();
 
-                if (s.top() == n)
+                while (ptrAux != nullptr)
                 {
-                    veces = true; // Se usa esta variable para ahorrar memoria
+                    if (n == ptrAux->getNum())
+                    {
+                        veces = true;
+                    }
+
+                    ptrAux = ptrAux->getNext();
                 }
 
-                aux.push(s.top());
-                s.pop();
-            }
-
-            if (veces)
-            {
-                cout << "\n\nEl número " << n << " está en la pila.";
-            } // Si la condición de arriba se ha cumlpido, se ha encontrado el número.
-            else
-            {
-                cout << "\n\nEl número " << n << " NO está en la pila.";
+                if (veces)
+                {
+                    cout << "\n\nEl número " << n << " está en la pila.";
+                } // Si la condición de arriba se ha cumlpido, se ha encontrado el número.
+                else
+                {
+                    cout << "\n\nEl número " << n << " NO está en la pila.";
+                }
             }
 
             veces = false; // Se devuelve al valor anterior
 
-            while (!aux.empty())
-            {
-                s.push(aux.top());
-                aux.pop();
-            }
             break;
 
         case 5:
 
-            cout << "Indica el número que quieres buscar: ";
-            cin >> n;
-
             dispEmpty(s);
 
-            while (!s.empty())
+            if (!s.empty())
             {
 
-                if (s.top() == n)
+                cout << "Indica el número que quieres buscar: ";
+                cin >> n;
+
+                ptrAux = s.getTop();
+
+                while (ptrAux != nullptr)
                 {
-                    veces++;
+                    if (n == ptrAux->getNum())
+                    {
+                        veces++;
+                    }
+
+                    ptrAux = ptrAux->getNext();
+                }
+                if (veces > 0)
+                {
+                    cout << "\n\nEl número \"" << n << "\" está " << veces << " veces en la pila";
                 }
 
-                aux.push(s.top());
-                s.pop();
+                else
+                {
+                    cout << "\n\nEl número " << n << " NO está en la pila.";
+                }
             }
 
-            if (veces > 0)
-            {
-                cout << "\n\nEl número \"" << n << "\" está " << veces << " veces en la pila";
-            }
-
-            else
-            {
-                cout << "\n\nEl número " << n << " NO está en la pila.";
-            }
-
-            while (!aux.empty())
-            {
-                s.push(aux.top());
-                aux.pop();
-            }
             break;
 
         case 0:
