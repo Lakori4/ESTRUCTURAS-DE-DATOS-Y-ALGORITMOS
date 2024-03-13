@@ -1,5 +1,4 @@
-.vscode/settings.json
-.vscode/tasks.json
+.vscode/
 *.exe
 *.ilk
 *.obj
