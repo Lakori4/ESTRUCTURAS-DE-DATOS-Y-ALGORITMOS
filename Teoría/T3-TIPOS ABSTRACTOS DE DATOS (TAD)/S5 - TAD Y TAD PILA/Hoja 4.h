@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <memory>
-#include "C:\Users\Santi\OneDrive - Universidad Antonio De Nebrija\1º Año\2º Semestre\ESTRUCTURAS DE DATOS Y ALGORITMOS\Teoría\T3-TIPOS ABSTRACTOS DE DATOS (TAD)\Nodo.h"
+#include "Teoría\T3-TIPOS ABSTRACTOS DE DATOS (TAD)\Nodo.h"
 
 using namespace std;
 
