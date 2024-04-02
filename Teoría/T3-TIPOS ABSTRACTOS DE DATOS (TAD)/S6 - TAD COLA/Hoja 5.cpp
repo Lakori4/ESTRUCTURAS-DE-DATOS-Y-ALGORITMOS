@@ -1,11 +1,27 @@
 // Santiago Valderrama
 
 #include <iostream>
-#include <vector>
+#include <memory>
 #include "Hoja 5.h"
-#include "C:\Users\Santi\OneDrive - Universidad Antonio De Nebrija\1º Año\2º Semestre\ESTRUCTURAS DE DATOS Y ALGORITMOS\Teoría\T3-TIPOS ABSTRACTOS DE DATOS (TAD)\Nodo.h"
+//#include "Teoría/T3-TIPOS ABSTRACTOS DE DATOS (TAD)/Nodo.h"
 
 using namespace std;
+
+
+Queue::Queue(const Queue &q) {
+
+    if (!q.empty()) {
+
+        shared_ptr<Nodo> ptrAux = make_shared<Nodo>(Nodo(q.first->getNum(), nullptr));
+
+        while (ptrAux != nullptr)
+        {
+            push(ptrAux->getNum());
+
+            ptrAux = make_shared <Nodo> (Nodo(ptrAux->getNext()->getNum(), nullptr));
+        }
+    }
+}
 
 // Returns boolean value if Queue is empty or not
 bool Queue::empty() const
@@ -202,7 +218,10 @@ int main()
             cout << "\n\nEL NÚMERO NO SE CORRESPONDE CON NINGUNA OPCIÓN.";
             break;
         }
+        Queue q2 (q);
     } while (cont);
+
+    
 
     return 0;
 }
