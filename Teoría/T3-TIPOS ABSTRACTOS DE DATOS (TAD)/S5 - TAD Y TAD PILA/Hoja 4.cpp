@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Hoja 4.h"
-#include "Teoría\T3-TIPOS ABSTRACTOS DE DATOS (TAD)\Nodo.h"
+
 
 using namespace std;
 
