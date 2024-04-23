@@ -69,6 +69,8 @@ class Arbol {
 
         void PostOrden(shared_ptr<Nodo> A) const;
         void recorrerPostOrden() const;
+
+        void recorrerAnchura() const;
 };
 
 #endif // TADARBOL_H
