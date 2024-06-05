@@ -18,13 +18,17 @@ int main() {
     cout << "\n\nEscribe tu opción: ";
     cin >> opc;
 
+    #ifdef __linux__
+    system("clear");
+    #else
     system("cls");
+    #endif
    
 
     switch (opc)
     {
     case 1:
-        //H1E1();
+        //H1E1();s
         break;
     
     case 2:

@@ -71,7 +71,11 @@ int menu () {
     cout << "\n0. Salir: ";
     cin >> opc;
 
+    #ifdef __linux__
+    system("clear");
+    #else
     system("cls");
+    #endif
 
     return opc;
 }
@@ -101,7 +105,7 @@ void insertarNum(Arbol &A) {
 
                 if (nAux->getHizq() == nullptr){ 
                     nAux->setHizq(make_shared<Nodo> (num));
-                    num = NULL;
+                    num = 0;
                 } 
                 nAux = nAux->getHizq(); 
 
@@ -111,7 +115,7 @@ void insertarNum(Arbol &A) {
 
                 if (nAux->getHdch() == nullptr) {
                     nAux->setHdch(make_shared<Nodo> (num));
-                    num = NULL;
+                    num = 0;
                 }
                 nAux = nAux->getHdch(); 
                 
@@ -121,7 +125,7 @@ void insertarNum(Arbol &A) {
                 cout << "\n\n\tERROR: El caracter introducido no se corresponde con ningún lado.";
                 break;
             }
-        } while (num != NULL);
+        } while (num != 0);
     }    
 }
 

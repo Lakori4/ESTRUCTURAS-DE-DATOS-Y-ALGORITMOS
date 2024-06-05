@@ -236,7 +236,13 @@ int menu()
     cout << "\n\n0. Salir";
     cout << "\n\n\n Selecciona el número correspondiente a tu opción: ";
     cin >> opc;
+
+    #ifdef __linux__
+    system("clear");
+    #else
     system("cls");
+    #endif
+        
     return opc;
 }
 

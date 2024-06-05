@@ -20,7 +20,11 @@ int main() {
     cout << "\n\nEscribe tu opción: ";
     cin >> opc;
 
+    #ifdef __linux__
+    system("clear");
+    #else
     system("cls");
+    #endif
    
 
     switch (opc)
